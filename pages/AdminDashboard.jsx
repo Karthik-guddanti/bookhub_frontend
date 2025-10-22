@@ -1,12 +1,8 @@
-// --- AdminDashboard.jsx ---
-// This file is in /frontend/src/pages/
 
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import bookService from '../services/book.services';
-import EditBookModal from '../components/ui/EditBookModal'; // <-- IMPORT THE MODAL
-
+import EditBookModal from '../components/ui/EditBookModal'; 
 const AdminDashboard = () => {
-  // ... (existing states for myBooks, form fields, loading, error)
   const [myBooks, setMyBooks] = useState([]);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -15,11 +11,9 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // --- NEW STATES FOR THE MODAL ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
-  // --- Fetch books on component mount ---
   useEffect(() => {
     const fetchMyBooks = async () => {
       try {
@@ -36,13 +30,11 @@ const AdminDashboard = () => {
     fetchMyBooks();
   }, []);
 
-  // --- Handle adding a new book ---
   const handleAddBook = async (e) => {
     e.preventDefault();
     try {
       const newBook = await bookService.addBook({ title, author, description, imageUrl });
       setMyBooks([newBook, ...myBooks]);
-      // Clear form fields
       setTitle('');
       setAuthor('');
       setDescription('');
@@ -52,7 +44,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // --- Handle deleting a book ---
   const handleDeleteBook = async (bookId) => {
     try {
       await bookService.deleteBook(bookId);
@@ -62,7 +53,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // --- NEW FUNCTIONS TO HANDLE THE MODAL ---
   const handleOpenEditModal = (book) => {
     setSelectedBook(book);
     setIsModalOpen(true);
@@ -74,7 +64,6 @@ const AdminDashboard = () => {
   };
 
   const handleBookUpdated = (updatedBook) => {
-    // Find the book in the state and replace it with the updated version
     setMyBooks(
       myBooks.map((book) =>
         book._id === updatedBook._id ? updatedBook : book
@@ -82,9 +71,7 @@ const AdminDashboard = () => {
     );
   };
 
-  // --- Basic Styling ---
   const styles = {
-    // ... (all your existing styles: container, formContainer, listContainer, etc.)
     container: { display: 'flex', gap: '2rem', padding: '2rem' },
     formContainer: { flex: 1, padding: '1.5rem', border: '1px solid #ccc', borderRadius: '8px' },
     listContainer: { flex: 2 },
