@@ -1,20 +1,16 @@
-// --- Navbar.jsx ---
-// This file is in /frontend/src/components/common/
-
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 const Navbar = () => {
-  const { user, logout } = useAuth(); // Get user and logout function from context
+  const { user, logout } = useAuth(); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login');
   };
 
-  // Basic styling
+
   const styles = {
     nav: {
       display: 'flex',
@@ -59,7 +55,6 @@ const Navbar = () => {
       </Link>
       <div style={styles.navLinks}>
         {user ? (
-          // --- Show if user IS logged in ---
           <>
             <span style={styles.welcome}>
               Welcome, {user.username} ({user.role})
@@ -69,7 +64,7 @@ const Navbar = () => {
             </button>
           </>
         ) : (
-          // --- Show if user is NOT logged in ---
+          
           <>
             <Link to="/login" style={styles.link}>
               Login

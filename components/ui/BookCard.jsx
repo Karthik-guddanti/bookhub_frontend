@@ -1,12 +1,7 @@
-// --- BookCard.jsx ---
-// This file is in /frontend/src/components/ui/
-
-import React from 'react';
-
 const BookCard = ({ book }) => {
   return (
     <div className="card-gradient group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      {/* Book Cover */}
+      
       <div className="relative overflow-hidden">
         <img 
           src={book.imageUrl} 
@@ -23,7 +18,6 @@ const BookCard = ({ book }) => {
         </div>
       </div>
       
-      {/* Book Info */}
       <div className="p-4">
         <h3 className="text-base font-poppins font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
           {book.title}

@@ -1,11 +1,7 @@
-// --- EditBookModal.jsx ---
-// This file is in /frontend/src/components/ui/
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import bookService from '../../services/book.services';
 
 const EditBookModal = ({ book, onClose, onBookUpdated }) => {
-  // State for the form fields, pre-filled with the book's data
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [description, setDescription] = useState(book.description);
@@ -14,7 +10,6 @@ const EditBookModal = ({ book, onClose, onBookUpdated }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // This effect updates the form if the 'book' prop changes
   useEffect(() => {
     setTitle(book.title);
     setAuthor(book.author);
