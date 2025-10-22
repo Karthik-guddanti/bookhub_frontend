@@ -1,7 +1,6 @@
 // --- App.jsx ---
 // This file is in /frontend/src/
 
-import React from 'react';
 import AppRouter from './routes/AppRouter.jsx';
 import Navbar from './components/common/Navbar.jsx'; // <-- IMPORT THE NAVBAR
 

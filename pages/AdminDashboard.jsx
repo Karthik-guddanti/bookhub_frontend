@@ -103,58 +103,91 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="flex gap-8 p-8 min-h-screen bg-gray-50">
       {/* --- ADD BOOK FORM --- */}
-      <div style={styles.formContainer}>
-        <h2>Add a New Book</h2>
-        <form onSubmit={handleAddBook}>
-          <div style={styles.formGroup}>
-            <label htmlFor="title" style={styles.label}>Title</label>
-            <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required style={styles.input} />
+      <div className="flex-1 p-6 border border-gray-300 rounded-lg bg-white shadow-md">
+        <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-6">Add a New Book</h2>
+        <form onSubmit={handleAddBook} className="space-y-4">
+          <div>
+            <label htmlFor="title" className="block text-sm font-poppins font-semibold text-gray-700 mb-2">Title</label>
+            <input 
+              type="text" 
+              id="title" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              required 
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 outline-none bg-white hover:border-gray-400"
+            />
           </div>
-          <div style={styles.formGroup}>
-            <label htmlFor="author" style={styles.label}>Author</label>
-            <input type="text" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} required style={styles.input} />
+          <div>
+            <label htmlFor="author" className="block text-sm font-poppins font-semibold text-gray-700 mb-2">Author</label>
+            <input 
+              type="text" 
+              id="author" 
+              value={author} 
+              onChange={(e) => setAuthor(e.target.value)} 
+              required 
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 outline-none bg-white hover:border-gray-400"
+            />
           </div>
-          <div style={styles.formGroup}>
-            <label htmlFor="description" style={styles.label}>Description</label>
-            <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} required style={styles.textarea} />
+          <div>
+            <label htmlFor="description" className="block text-sm font-poppins font-semibold text-gray-700 mb-2">Description</label>
+            <textarea 
+              id="description" 
+              value={description} 
+              onChange={(e) => setDescription(e.target.value)} 
+              required 
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 outline-none bg-white hover:border-gray-400 min-h-20 resize-vertical"
+            />
           </div>
-          <div style={styles.formGroup}>
-            <label htmlFor="imageUrl" style={styles.label}>Image URL</label>
-            <input type="text" id="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required style={styles.input} />
+          <div>
+            <label htmlFor="imageUrl" className="block text-sm font-poppins font-semibold text-gray-700 mb-2">Image URL</label>
+            <input 
+              type="text" 
+              id="imageUrl" 
+              value={imageUrl} 
+              onChange={(e) => setImageUrl(e.target.value)} 
+              required 
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all duration-300 outline-none bg-white hover:border-gray-400"
+            />
           </div>
-          <button type="submit" style={styles.button}>Add Book</button>
+          <button 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:shadow-lg hover:shadow-green-500/25 text-white font-poppins font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:-translate-y-1 transform"
+          >
+            Add Book
+          </button>
         </form>
       </div>
 
       {/* --- LIST OF ADMIN'S BOOKS --- */}
-      <div style={styles.listContainer}>
-        <h2>My Added Books</h2>
-        {loading && <p>Loading...</p>}
-        {error && <p style={styles.error}>{error}</p>}
-        <div>
-          {!loading && !error && myBooks.length === 0 && <p>You haven't added any books yet.</p>}
+      <div className="flex-2">
+        <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-6">My Added Books</h2>
+        {loading && <p className="text-gray-600">Loading...</p>}
+        {error && <p className="text-red-600 mt-4">{error}</p>}
+        <div className="space-y-4">
+          {!loading && !error && myBooks.length === 0 && (
+            <p className="text-gray-600 text-center py-8">You haven't added any books yet.</p>
+          )}
           
           {myBooks.map((book) => (
-            <div key={book._id} style={styles.bookItem}>
-              <img src={book.imageUrl} alt={book.title} style={styles.bookImg} />
-              <div style={styles.bookInfo}>
-                <h3>{book.title}</h3>
-                <p>by {book.author}</p>
-                <p>{book.description.substring(0, 100)}...</p>
+            <div key={book._id} className="flex gap-4 p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+              <img src={book.imageUrl} alt={book.title} className="w-20 h-28 object-cover rounded-lg" />
+              <div className="flex-1">
+                <h3 className="text-lg font-poppins font-bold text-gray-900 mb-1">{book.title}</h3>
+                <p className="text-sm font-roboto text-gray-600 mb-2">by {book.author}</p>
+                <p className="text-sm font-roboto text-gray-700 line-clamp-3">{book.description.substring(0, 100)}...</p>
               </div>
-              {/* --- UPDATED BUTTONS --- */}
-              <div style={styles.bookActions}>
+              <div className="flex flex-col gap-2">
                 <button 
                   onClick={() => handleOpenEditModal(book)} 
-                  style={styles.editButton}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-poppins transition-colors duration-200"
                 >
                   Edit
                 </button>
                 <button 
                   onClick={() => handleDeleteBook(book._id)} 
-                  style={styles.deleteButton}
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-poppins transition-colors duration-200"
                 >
                   Delete
                 </button>
