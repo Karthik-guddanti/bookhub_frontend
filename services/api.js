@@ -2,10 +2,8 @@
 // This file is in /frontend/src/services/
 
 import axios from 'axios';
-
-// 1. Create a central axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Your backend API base URL
+  baseURL: 'https://bookhub-backend-4zcj.onrender.com', // Your backend API base URL
 });
 
 // 2. Add a request interceptor
